@@ -58,13 +58,8 @@ export class DishdetailPage {
         {
           text: 'Add to Favorites',
           handler: () => {
-            let commentPage = this.modalCtrl.create(CommentPage);
-            commentPage.present();
-            commentPage.onDidDismiss(data => {
-              if (!data) return;
-              this.dish.comments.push(data);
-            });
-          }  
+            this.addToFavorites();
+          }
         }, 
         {
           text: 'Add a Comment',
@@ -72,9 +67,10 @@ export class DishdetailPage {
             console.log('Comment clicked');
             let commentPage = this.modalCtrl.create(CommentPage);
             commentPage.present();
-            commentPage.onDidDismiss(data => {
-              if (!data) return;
-              this.dish.comments.push(data);
+            commentPage.onDidDismiss(comment => {
+              if(comment){
+                this.dish.comments.push(comment);
+              }
             });
           }
         }, 
