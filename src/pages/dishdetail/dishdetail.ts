@@ -4,6 +4,7 @@ import { Dish } from '../../shared/dish';
 import { Comment } from '../../shared/comment';
 import { FavoriteProvider } from '../../providers/favorite/favorite';
 import { CommentPage } from '../comment/comment';
+import { Storage } from '@ionic/storage';
 
 /**
  * Generated class for the DishdetailPage page.
@@ -29,7 +30,8 @@ export class DishdetailPage {
     private favoriteservice: FavoriteProvider,
     private toastCtrl: ToastController,
     private actionSheetCtrl: ActionSheetController,
-    private modalCtrl: ModalController) {
+    private modalCtrl: ModalController,
+    private storage: Storage) {
     this.dish = navParams.get('dish');
     this.favorite = favoriteservice.isFavorite(this.dish.id);
     this.numcomments = this.dish.comments.length;

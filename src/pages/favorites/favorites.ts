@@ -28,9 +28,20 @@ export class FavoritesPage implements OnInit {
   }
 
   ngOnInit() {
-    this.favoriteservice.getFavorites()
-      .subscribe(favorites => this.favorites = favorites,
-        errmess => this.errMess = errmess);
+    this.favoriteservice.getFromStorage().then(favorites => {
+      if (favorites) {
+        this.favoriteservice.favorites = favorites;
+        this.favoriteservice.getFavorites()
+        .subscribe(favorites => this.favorites = favorites,
+          errmess => this.errMess = errmess);
+      }
+      else {
+        this.favoriteservice.favorites = [];
+        this.favoriteservice.getFavorites()
+        .subscribe(favorites => this.favorites = favorites,
+          errmess => this.errMess = errmess);
+      }
+    });
   }
 
   ionViewDidLoad() {

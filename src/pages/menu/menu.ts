@@ -46,10 +46,20 @@ export class MenuPage implements OnInit {
 
   addToFavorites(dish: Dish) {
     console.log('Adding to Favorites', dish.id);
-    this.favoriteservice.addFavorite(dish.id);
-    this.toastCtrl.create({
-      message: 'Dish ' + dish.id + ' added as favorite successfully',
-      position: 'middle',
-      duration: 3000}).present();
+    this.favoriteservice.getFromStorage()
+      .then(favorites => {
+        if (!favorites) {
+          this.favoriteservice.favorites = []
+        }
+        else {
+          this.favoriteservice.favorites = favorites;
+        }
+        this.favoriteservice.addFavorite(dish.id);
+        this.toastCtrl.create({
+          message: 'Dish ' + dish.id + ' added as a favorite successfully',
+          position: 'middle',
+          duration: 3000
+        }).present();
+      });
   }
 }
