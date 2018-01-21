@@ -21,6 +21,17 @@ export class FavoriteProvider {
   constructor(public http: Http,
     private dishservice: DishProvider,
     private storage: Storage) {
+          console.log('Hello FavoriteProvider Provider');
+    this.favorites = [];
+    this.storage.get('favorites').then(favorites => {
+      if (favorites) {
+          console.log(favorites);
+        this.favorites = favorites;
+      }
+      else {
+          console.log('favorites not defined');
+      }
+    });  
   }
   
   getFromStorage(): Promise<any[]> {
