@@ -44,7 +44,7 @@ export class ContactPage {
     
     this.callNumber.callNumber(phone, true)
       .then(() => console.log('Launched dialer:' + phone))
-      .catch((e) => console.log('Error launching dialer:' + phone));
+      .catch(() => console.log('Error launching dialer:' + phone));
   }
 
 }
